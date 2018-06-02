@@ -25,6 +25,11 @@ import imageio as io
 FRAME_COUNT = 50
 FRAME_DURATION = 0.02
 
+MOD_START_X = -38
+MOD_START_Y =  71 -35
+MOD_END_X =     0
+MOD_END_Y =     0 -35
+
 # Station coordinates (start_x, start_y, node_type, end_x, end_y)
 # Node types: 0 -> Regular station (small dot)
 #             1 -> Transfer station (big dot)
@@ -208,8 +213,8 @@ for frame in range(FRAME_COUNT):
 
         for i, coord in enumerate(metro_line):
 
-            x = transform(coord[0], coord[3], frame)
-            y = transform(coord[1], coord[4], frame)
+            x = transform(coord[0] + MOD_START_X, coord[3] + MOD_END_X, frame) 
+            y = transform(coord[1] + MOD_START_Y, coord[4] + MOD_END_Y, frame)
             
             if i == 0:
                 ctx.move_to(x, y)
@@ -227,8 +232,8 @@ for frame in range(FRAME_COUNT):
         
         for coord in metro_line:
 
-            x = transform(coord[0], coord[3], frame)
-            y = transform(coord[1], coord[4], frame)
+            x = transform(coord[0] + MOD_START_X, coord[3] + MOD_END_X, frame) 
+            y = transform(coord[1] + MOD_START_Y, coord[4] + MOD_END_Y, frame)
 
             ctx.move_to(x, y)
 
@@ -260,18 +265,18 @@ images = []
 for filename in frames_list:
     images.append(io.imread(filename))
 
-io.imwrite('part_1.gif', images[0], duration = 1.00)
+io.imwrite('part_1.gif', images[0], duration = 5.00)
 io.mimwrite('part_2.gif', images, duration = FRAME_DURATION)
-io.imwrite('part_3.gif', images[-1], duration = 1.00)
+io.imwrite('part_3.gif', images[-1], duration = 5.00)
 
 # To transition back to the start
-#io.mimwrite('part_4.gif', reversed(images), duration = FRAME_DURATION)
+io.mimwrite('part_4.gif', reversed(images), duration = FRAME_DURATION)
 
 for f in glob.glob('frame_*.png'):
     os.remove(f)
 
 result = sp.run(['gifsicle', '--colors', '256', 
-                 'part_1.gif', 'part_2.gif', 'part_3.gif'], # , 'part_4.gif'],
+                 'part_1.gif', 'part_2.gif', 'part_3.gif', 'part_4.gif'],
                  stdout=sp.PIPE)
 
 with open('Montreal.gif', 'wb') as f:
