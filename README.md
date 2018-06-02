@@ -5,6 +5,8 @@ Generates a gif image comparing Montreal metro map to its real geography.
 Inspired by Reddit post "Berlin Subway Map compared to it's real geography"
 https://www.reddit.com/r/dataisbeautiful/comments/6baefh/berlin_subway_map_compared_to_its_real_geography/
 
+![Montreal metro gif](https://raw.githubusercontent.com/will8211/montreal/master/Montreal.gif)
+
 Project at https://github.com/will8211/montreal
 
 Shared at https://www.reddit.com/r/dataisbeautiful/comments/6c8ukp/montreal_metro_map_distances_vs_geographic/
